@@ -45,7 +45,7 @@ namespace ReserveMicroservice.Application.Api
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "https://ReserveMicroservice-fernando-iam-microservice-identity.azurewebsites.net";
+                    options.Authority = "https://iam-microservice-identity.azurewebsites.net";
                     options.RequireHttpsMetadata = false;
                     options.ApiName = "ReserveMicroservice_ResourceApi";
                 });

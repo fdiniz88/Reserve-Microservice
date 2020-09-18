@@ -9,7 +9,7 @@ using ReserveMicroservice.Common.Domain.DTO;
 
 namespace ReserveMicroservice.Application.Api.Controllers
 {
-   // [Authorize(Roles = "ReserveHolder")]
+    [Authorize(Roles = "Manager,ReserveHolder,Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ReservesController : ControllerBase
