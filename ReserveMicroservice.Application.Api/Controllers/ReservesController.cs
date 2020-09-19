@@ -70,11 +70,31 @@ namespace ReserveMicroservice.Application.Api.Controllers
         public async Task<ActionResult<Reserve>> PostReserve([FromBody] Reserve reserve)
         {
             try
-            {
-                // var resultado = _CarService.PostCar(car);
+            {               
                 var result = await _ReserveService.PostReserve(reserve);
 
                 return Created("", result);
+            }
+            catch (Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
+        /// <summary>
+        /// Delete Reserve
+        /// </summary>
+        /// /// <param name="id">Reserve identification number</param>        
+        /// <returns>Object containing car information
+        /// </returns>
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Car>> DeleteReserve(Guid id)
+        {
+            try
+            {
+                var result = await _ReserveService.DeleteReserve(id);
+                return Ok(result);
             }
             catch (Exception ex)
             {

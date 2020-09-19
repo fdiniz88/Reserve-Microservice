@@ -48,9 +48,23 @@ namespace ReserveMicroservice.Domain.AggregatesModel.ReserveAggregate
             return ReturnResultDto;
         }
 
-        public Task<ReturnResultDto> DeleteReserve(Guid id)
+        public async Task<ReturnResultDto> DeleteReserve(Guid id)
         {
-            throw new NotImplementedException();
+            ReturnResultDto ReturnResultDto = new ReturnResultDto();
+            ReturnResultDto.Action = "Delete Reserve";
+
+            Reserve Reserve = await _ReserveRepository.ReadAsync(id);
+            if (Reserve == null)
+            {
+                ReturnResultDto.Inconsistencies.Add(
+                    "Reserve não encontrado");
+            }
+            else
+            {
+                await _ReserveRepository.DeleteAsync(id);
+                await _ReserveRepository.SaveChangesAsync();
+            }
+            return ReturnResultDto;
         }
       
     }
